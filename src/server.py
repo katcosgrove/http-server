@@ -70,17 +70,15 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         """Routing for POST requests."""
         parsed_path = urlparse(self.path)
-        # parsed_qs = parse_qs(parsed_path.query)
+        parsed_qs = parse_qs(parsed_path.query)
 
         if parsed_path.path == '/cow':
             try:
-                content_length = int(self.headers['Content-Length'])
-                body = json.loads(self.rfile.read(content_length).decode('utf8'))
-                msg = json.dumps(default.milk(body['msg']))
-
                 self.send_response(200)
                 self.end_headers()
-                self.wfile.write({'content': msg}.encode('utf8'))
+                text = parsed_qs['msg'][0]
+                msg = json.dumps(default.milk(text))
+                self.wfile.write(msg.encode('utf8'))
                 return
 
             except KeyError:

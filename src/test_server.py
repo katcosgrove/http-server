@@ -10,7 +10,24 @@ def test_home_sends_200_response():
 def test_home_200_body():
     """Test body of successful GET request."""
     response = requests.get('http://127.0.0.1:3000')
-    assert response.text == '<a href="/cowsay">Cowsay</a>'
+    assert response.text == '''<!DOCTYPE html>
+                                    <html>
+                                    <head>
+                                        <title> cowsay </title>
+                                    </head>
+                                    <body>
+                                        <header>
+                                            <nav>
+                                            <ul>
+                                                <li><a href="/cowsay">cowsay</a></li>
+                                            </ul>
+                                            </nav>
+                                        <header>
+                                        <main>
+                                            <!-- project description -->
+                                        </main>
+                                    </body>
+                                    </html>'''
 
 
 def test_home_headers():
