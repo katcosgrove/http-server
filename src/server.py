@@ -18,7 +18,24 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
 
-            self.wfile.write(b'<a href="/cowsay">Cowsay</a>')
+            self.wfile.write(b'''<!DOCTYPE html>
+                                    <html>
+                                    <head>
+                                        <title> cowsay </title>
+                                    </head>
+                                    <body>
+                                        <header>
+                                            <nav>
+                                            <ul>
+                                                <li><a href="/cowsay">cowsay</a></li>
+                                            </ul>
+                                            </nav>
+                                        <header>
+                                        <main>
+                                            <!-- project description -->
+                                        </main>
+                                    </body>
+                                    </html>''')
             return
 
         elif parsed_path.path == '/cowsay':
